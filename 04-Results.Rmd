@@ -1,0 +1,648 @@
+---
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+```{r, echo = FALSE}
+editMetric <- function(metriclist, colnumber){
+
+      ee <- lapply(lapply(metriclist, summary), function(x) x[,colnumber]) # Focus on column
+      ee <- gsub("Min.   :|1st Qu.:|Median :|Mean   :|3rd Qu.:|Max.   :", "", ee) # Erase strings from summary output 
+      ee <- regmatches(ee,
+                       gregexpr("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?",ee)) # Match floating point with regex (http://www.regular-expressions.info/floatingpoint.html)
+      ee <- lapply(ee, as.numeric) # String to numbers 
+      ee1 <- c()
+        for(i in 1:6){
+          ee1[[i]] <- unlist(ee)[seq(i,length(unlist(ee)), by= 6)] # Sequence data from summary output
+        }
+      names(ee1) <- c("Min", "firstQ", "Median", "Mean", "thirdQ", "Max")
+      
+      ee1$distances <- unlist(as.numeric(regmatches(names(metric),
+                                                    gregexpr("[-+]?([0-9]*[0-9]+|[0-9]+)",
+                                                             names(metriclist))))) # Add values of distances based on named files
+
+      return(ee1)
+     
+}
+
+```
+
+# Results
+
+## Rapia taedigera in Costa Rica and Nicaragua
+
+*Raphia taedigera* has a patchy distribution in Nicaragua and Costa Rica. In Nicaragua *Raphia taedigera* patches are only found at its Atlantic coast. With an extension of 11008,832 sq Km correspond to the 0.84% of the national territorial extent of the country. Patches in Nicaragua covers an mean area of 1.35sq Km +/-0.12sq Km, with the biggest patch having an extension of 60.62sq Km. In Costa Rica, patches are distributed mainly on its Atlantic coast. However, *Raphia taedigera* can also be found in the Pacific coast at the south of the country and at the base of the Nicaragua lake. In Costa Rica, *Raphia* patches covers an extension of 539,313 sq Km, around 1.05% of the national territory and 16.5% of all wetlands in the country  (Muñoz et al. 1998. Serrano-Sandi et al. 2013). In his work, Serrano-Sandi (2013) also calculated the Index of Relative Exposure (IPR =  Perimeter / Expected Perimeter for a circle with the same area as the irregular polygon) for all polygons. *Raphia* patches in general had low IPR values, being considered as  *vulnerable* or *highly vulnerable* to external pressures. Up until the year 2013, 47% and 55.5% of the total *Raphia* distribution falls in lands with some level of environmental protection. However, it has been estimated that *Raphia* patches have undergone a reduction of 62.67 sq Km on their extention from 1970 to 2000. (Sylvander 1981, Serrano-Sandi et al. 2013). 
+
+## Literature search for *Tapirus baiirdi* ecological information
+
+From literature search strategy, relevant observations on the seed dispersal ecology of *Tapirus bairdii* were separated into five classes (Figure 4). The class "Habitat use" with approximately 80 events recorded had the most number of observations reported. Most of the information collected comes from Chassot et al. 2005, Lira-Torres et al. 2014 and Schank et al. 2015. Observations collected were mainly focused on *Tapirus bairdii*. However, relevant observations were collected for *Tapirus terrestris* and *Tapirus indicus* species with similar habitat requirements and movements to *Tapirus bairdii* ( Appendix Table S xxx ). 
+
+### Raphia taedigera seed dispersal 
+
+Matching the literature information gathered for *Tapirus bairdii* with the available information on the the ecology of *Raphia taedigera* (Revista Biología Tropical 2013. Vol.61, Supp 1). Seed dispersal connectivity between *Raphia taedigera* patches, defined as the ability of movement of a seed from one patch to reach and germinate in another, is deduced to be a process that can be classified into three main categories: 
+
+1) Seed dispersal due to changing water currents: According to Myers et al. (2013b) non-floating seeds of *Raphia taedigera* can be rolled away from the parent plant assisted by strong water currents that push the seed over the ground. This process may disperse the seed short distances and is likely to happen along riverine borders in the flooding season. 
+
+2) Seed dispersal mediated by *Tapirus bairdii*:  Farril et al. (2013) describes overlapping home ranges of *Tapirus bairdi* averaging 1.3sqKm (+/- 0.73km2) with a maximun range of 2.3sqKm.  Reyna-Hurtado et al. 20106 In the Calkamul Biosphere Reserve over the period of 2011-2015 a home range of 23 sq Km was estimated for a single individual of *Tapirus bairdii*. They also report a the occurrence trip back of 7.8Km in 2days and a camera trap record 10km outside the main home range of the individual. For *Tapirus terrestris*, effective dispersion of seeds have been recorded up to 1500m. Radio collared data for *Tapirus terrestris* showed individuals moving up moving up to 13Km over a 24 hr period (GPS Radio collared data), with a mean movement distance in a 24hr period of 5.2Km (range 3.6 - 6.7km). Being *Tapirus terrestris*  is the sister species of *Tapirus bairdii*, dispersal distances for both species may be the similar, with the only extra consideration that *Tapirus bairdii* is generally larger than *Tapirus terrestris* and therefore could be able to move a bit more larger distances. Despite the fruits being available and abundant all year round, there is not much evidence of depredation of the fruit by animals. The fruit of *Raphia* might be to strong to be consumed by peccaries or monkeys, *Tayassu pecari*   have been observed to feed on the fruits of palms, but they probably destroy the seed in the mastication process (Cite!). In seed removal experiments reported in (Myers 1984, Myers 2013) there was no evidence of fruit or seed consumation by animals, apart of some marks left by rodents. The tapir appears to be the only effective animal seed disperser of *Raphia taedigera*.  The distribution of *Raphia* in Costa Rica and Nicaragua matches the distribution of Tapirs in the those countries. Furthermore, Tapirs are known seed dispersers of fruits with similar characteristics as the ones of *Raphia* (i.e. Megafaunal Fruits). The Central American Tapirs *Tapirus bairdii* and deers *Odocoileus virginianus* are seen frequently to visit *Raphia* patches (Naranjo-Pinera 1995, Foerster and Vaughan 2003).  Therefore, seeds of *Raphia taedigera* could be transported inside the Tapir's stomach. Dispersal distances, for which a seed from one patch could reach another one, would be then limited by the daily movements of the Tapir within their home range. Foerster and Vaughan 2003, after following radio-tagged tapirs forest patches, report that they appeared to travel directly from one Licania platypus to another, circling the bases of the trees in search of fruit while essentially ignoring the remaining vegetation. Reyna-Hurtado et al 2016 also mentions the presence of some sort of the spatial memory to explain the pattern of movements of the Tapir. 
+
+3) Long distance seed dispersal events: The present distribution of *Raphia taedigera* make its conceivable the existance of long distance dispersal events. Besides we known that *Raphia taedigera* is able to colonize permanently flodded areas, there is not information on the causes of the observed distribution of patches. The distribution of patches along the study area could be product of dispersal by megafauna, past continous distributions, multiple arrivals, human use or a mixture of all them. Nevertheless, actual long distance dispersal connectivity may be also dependant on the Tapirs movements. For *Tapirus bairdii*, despide having overlapping home ranges (Foerster and Vaughan et añ 2003), is documented that they can move big distances in search for new home ranges (Foerster 1998). Tapirs can move up to 10Km in one day, prefering to move along creeks, rivers and avoiding pronounced slopes. (Chassot et al. 2005; Farril et al. 2013). Considering maximun daily movements along with the digestion time (4-23 days) (Tapirus bairdii fact sheet: San Diego Zoo) Tapir mediated long distance dispersal events of *Raphia taedigera* will occur when a tapir that has already consumed a fruit of *Raphia taedigera* will move in search for new home ranges. Such long distance dispersal events are believed to be rare but their effects could be expressed at a large geographical and temporal scales. 
+
+
+```{r, echo = FALSE,  out.width='400px', fig.align='center', fig.cap="Distribution of Raphia dominated palm swamps (Yolillales) in Costa Rica and Nicaragua.  Data comes from Serrano - Sandi et al. 2013. Interactive version in: https://code.earthengine.google.com/49bfde3347f6a527d733d20c1dae4c2d"}
+knitr::include_graphics("www/images/distribution.png")
+```
+
+```{r, echo=FALSE, fig.align='center', fig.cap="Ecological observations gathered from literature. Bars represent the number of observations for a determined Ecological class or from a determined source. Gray bars represent the total number of observations, colored bars represent only those specific to Tapirus bairdii"}
+
+obs <- read.csv("www/observation/Observations.csv", header = T, stringsAsFactors = T)
+
+col = c("#777acd",
+"#ad963d",
+"#c55a9f",
+"#5ba965",
+"#ca5e4a")
+
+col2 = c("#6bb84c",
+"#b460bd",
+"#c7aa3f",
+"#697ecd",
+"#cf5f40",
+"#4fb9a1",
+"#c8567a",
+"#64843f",
+"#ac7d41",
+"darkgreen")
+
+par(las = 1, mfrow = c(2,2), oma = c(0,0,0,0), mar = c(0.5,4,1,3))
+barplot(table(obs$VariableClass), 
+        xaxt="n", 
+        xlab = "Classes",
+        ylab = "Observations")
+barplot(table(obs$VariableClass[obs$Species == "Tapirus bairdii"]), 
+        xaxt="n", 
+        xlab = "Classes",
+        ylab = "Observations", 
+        add = T,
+        col = col)
+plot(0,0, xaxt = "n", frame.plot = F,  xlab = "", ylab= "", yaxt = "n")
+legend("top", levels(obs$VariableClass), fill = col, title = "Ecology classes")
+
+barplot(table(obs$Source), 
+        xaxt="n", 
+        xlab = "Classes",
+        ylab = "Observations")
+barplot(table(obs$Source[obs$Species == "Tapirus bairdii"]), 
+        xaxt="n", 
+        xlab = "Classes",
+        ylab = "Observations", 
+        add = T,
+        col = col2)
+plot(0,0, xaxt = "n", frame.plot = F,  xlab = "", ylab= "", yaxt = "n")
+legend("top", levels(obs$Source), fill = col2, title = "Source")
+
+
+```
+
+# Probability of connectivity
+
+Overall habitat availability for dispersal measured with PCnum shows an increasing trend with increasing maximun dispersal distances. However, PCnum peaks at short maximum dispersal distances (100m) and falls at the next dispersal distance (300m) creating a valley as overall habitat availability steadily increases again with increasing dispersal distances. A second valley in the distribution of PCnum values appears at maximum dispersal distances of 6700m (Figure 5, bottomright pane). The distribution of median dPC values in function with increasing maximum dispersal distances serves a proxy for the relative effect on the changes to the overall habitat availability for dispersal by the removal of any patch in the network. For dispersal scenarios with higher median values, in this case those for very short maximum dispersal distances (100m) and very long dispersal events, the removal of a random patch would represent higher relative changes in the overall habitat availabity for dispersal. For dispersal distances reported for the Tapir, median dPC values tend to incrase with increasing maximun dispersal distances. Nevertheless, for the dispersal scenario of 6700m there is the presence of a valley, with dPC values lower than for all dispersal scenarios tested (Figure 5, topright).
+
+Maximum ECA values determine specific patches of interest for monitoring or conservation efforts. By contrasting ECAmax with ECAmedian the overall dependance on very few patches to maintain the overall habitat availability for dispersal is evident for *Raphia taedigera* patches. For all the dispersal scenarios computed, maximum ECA values reach a peak at dispersal distances of 1500m. This shows that this dependance on few patches to mantain dispersal connectivity is even relatively higher at maximum dispersal distances of 1500m. For very long and short dispersal scenarios. maximum values of ECA is at its relative lowest (Figure 5 left pane). 
+
+Overall, the area weighted dispersal flux (dPCFlux) (Saura and Rubio 2010) contributed the most to habitat availability for dispersal measured by PCnum, except for the dispersal scenarios of 6700m and 240000m, where contributed second, behind PCIntra. PCFlux contribution to habitat availability reach its lowest at very long dispersal scenarios (2400000m) and a peak at very short dipersal (100m). Valleys, highlighting drops in the relative contribution of PCFlux compared with the other dispersal scenarios were found at 1500m and 6700m. The contribution due to Intrapatch connectivity (PCIntra) to habitat availability reach its maximum at dispersal distance of 240000m. PCIntra presents also a local maximums at dispersal distances of 1500m and 6700m with valleys at 5200m. The contribution of PCIntra is at its minimum at dispersal distances of 100m. The "stepping stone" (PCconnect) contribution to habitat availability at dispersal distances of 13000m and following a similar pattern as the contributions of PCIntra with exceptuanding the dispersal scenario of 2400000 where the overall contribution to habitat availability by patches acting as "stepping stones" is at is relative lowest. At 100m dPCconnector for all patches is equal to 0 as not a single patch is acting as stepping stone at this dispersal threshold (patches are not connected through other patches) (Figure 6).
+
+
+
+```{r, echo=FALSE}
+# Load data from CONEFOR (PC deltas)
+coneforMetrics <- list.files("www/data/CONEFORmetrics/") # Files in data folder 
+coneforMetrics <- paste("www/data/CONEFORmetrics/", coneforMetrics, sep="") # Recreate full path 
+overall <- list.files("www/data/OverallIndex/")
+overall <-  paste("www/data/OverallIndex/", overall, sep="")
+
+metric <- lapply(coneforMetrics, function(x) read.csv(x, header = T, stringsAsFactors = F)) # Load individual csv's
+names(metric) <- list.files("www/data/CONEFORmetrics/") # Give appropiate names
+
+ov.metric <- lapply(overall, function(x) read.table(x, header = F, stringsAsFactors = F))
+names(ov.metric) <- list.files("www/data/OverallIndex/") # Give appropiate names
+
+PCnum <- reshape2::melt(lapply(ov.metric, function(x) x))
+PCnum$L1 <- as.numeric(gsub(".txt", "", PCnum$L1))
+PCnum$variable <- NULL
+
+  
+# 
+# # Max dPA value to calculate PC 
+# al <- max(metric$`100m.csv`$dA) ### To Check maximun probability!!! 
+# PCmetri <- lapply(metric ,function (x) sapply(x[,3], function(x) x/al^2)) # Calculate PC metrics from Conefor delta outputs
+# names(PCmetri) <- as.numeric(sapply(names(PCmetri), function(x)gsub( "m.csv", "",x))) # extract the "m.csv" pattern from the names 
+# PCmetri <- lapply(PCmetri, function(x) sort(x, decreasing = T)) # Sort PC (useful to apply colors in maps later)
+# PCmetri <- reshape2::melt(PCmetri) # flatten list
+# PCmetri$L1 <- as.numeric(PCmetri$L1) # as numeric threshold distances
+
+
+dPC <- lapply(metric ,function (x) sapply(x[,3], function(x) x)) # PCnum values
+names(dPC) <- as.numeric(sapply(names(dPC), function(x)gsub( "m.csv", "",x))) # extract the "m.csv" pattern from the names 
+dPC <- lapply(dPC, function(x) sort(x, decreasing = T)) # Sort PC (useful to apply colors in maps later)
+dPC <- reshape2::melt(dPC) # flatten list
+dPC$L1 <- as.numeric(dPC$L1) # as numeric threshold distances
+
+```
+
+```{r, echo = FALSE}
+#####Settings
+colpal = c('#67001f','#b2182b','#d6604d','#f4a582','#fddbc7','#d1e5f0','#92c5de','#4393c3','#2166ac','#053061') # Set palette
+
+
+names(colpal) = sort(unique(as.numeric(PCnum$L1)), decreasing = T) # name colors according to dispersal distances
+#PCmetri$col <- colpal[match( PCmetri$L1,names(colpal))]
+PCnum$col <- colpal[match( PCnum$L1,names(colpal))]
+#PCmetri$col <- colpal[match( PCmetri$L1,names(colpal))]
+dPC$col <- colpal[match( dPC$L1,names(colpal))]
+colr = scales::alpha("#a7c78e",alpha = 0.3)
+######
+```
+
+
+```{r, echo = FALSE, eval = T}
+# Load shapefile with the polygons with Raphia distributions
+dist <-raster::shapefile("www/data/raphiadist/patchessinglepart.shp")
+# Merge the shapefile with the metrics dataset
+dist@data <- as.data.frame(sapply(metric, function(x) raster::merge(dist,x, by.y ="Node", by.x = "Patches")))
+
+# Write output as file 
+# rgdal::writeOGR(dist, "www/data/raphiadist/merge", driver = "ESRI Shapefile", layer = "dist")
+# merged <- rgdal::readOGR("www/data/raphiadist/merge/dist.shp", "dist")
+```
+
+```{r, echo = FALSE, results=FALSE, fig.align="center", fig.cap=" Probability of Connectivity (PCnum) for all distance thresholds evaluated. Left pane shows the distribution of PCnum values for all patches at all dispersal distances considered, PCnum has been converted to Equivalent Connected Area (ECA) (Saura 2011) to prioritize better low metric values of PCnum (Saura and Torne 2012). Right panes show the median (up) and mean (bottom) PCnum values in function of the distance thresholds. Note that the x axis has been logarithimized for all plots. Highligthed region correspond to the distances for which dispersl thresholds correspond to the maximum dispersal distances and daily movement of Tapirs reported in literature"}
+split.screen(rbind(c(0.15,0.6,0.05, 0.98), c(0.6, 0.98, 0.05, 0.6), c(0.6, 0.98, 0.6, 0.98), c(0.0, 0.13, 0.1, 0.98), c(0.01,0.9,0.01,0.2)))
+screen(1)
+par(las = 2, mar = c(4,4,0,1), oma = c(1,1,1,1))
+
+plot(value~jitter(L1, 0.5), dPC,
+     log ="x", pch = 16, 
+     ylab= "dPC = dPCIntra + dPCFlux + dPCConnector", 
+     xlab = "Distance threshold", 
+     col = dPC$col, cex = 1.2,
+     cex.lab = 0.7, cex.axis = 0.7)
+
+rect(1500, 0,52000,30, col = colr, border = NA)
+screen(2)
+par(las=2, mar = c(4,4,0,0))
+
+plot(sqrt(value)~L1 , PCnum,
+     log ="x", pch = 16,
+     ylab= " ECA = sqrt(PCnum)", 
+     xlab = "Distance threshold", 
+     col = PCnum$col, cex = 1.2,
+     cex.lab = 0.7, cex.axis = 0.7)
+points(sqrt(value)~L1 , PCnum, cex = 1.2)
+rect(1500, 0,52000,16E09, col = colr, border = NA)
+
+screen(3)
+par(las=2, mar = c(0,4,0,0))
+
+plot(sapply(unique(L1), function(x) median(value[L1 == x])) ~ unique(L1) , dPC, 
+      cex = 1.2,  col = unique(PCnum$col), 
+     pch = 15, log = "x",
+     cex.lab = 0.7, cex.axis = 0.7, 
+     xaxt = "n", ylab = "median dPC")
+points(sapply(unique(L1), function(x) median(value[L1 == x])) ~ unique(L1) , dPC, 
+       cex = 1.2, pch = 0,
+       cex.lab = 0.7, cex.axis = 0.7)
+
+rect(1500, 0,52000,0.8, col = colr, border = NA)
+screen(4)
+par(mar = c(0,0,0,0), oma = c(0,1,2,0))
+plot.new()
+legend("center", legend = sort(unique(dPC$L1)),
+       pch =16, col = rev(colpal), title = "Distance \n threshold \n (meters)", bty = "n")
+```
+
+
+Export figures for report: 
+
+Hyphotesis 1:  
+```{r}
+
+png(filename = "www/ReportFilesPlots/Hyphothesis1.png",width = 1900, height = 1500, res = 250  )
+par(las = 1, oma = c(3,3,3,3))
+
+bars <- rev(c('blue','#feb24c','#f03b20'))
+
+colr = scales::alpha(bars,alpha = 0.3)
+dat <- PCnum[PCnum$V1 == "EC(PC):",]
+plot(value~L1 ,dat ,
+     pch = 16,log = "x",
+     ylab= " EC (Equivalent Connectivity)", 
+     xlab = "Maximum Dispersal Distance threshold Log(m)", 
+     col = "black", cex = 1.5,
+     cex.lab = 1.2, cex.axis = 0.7)
+
+rect(13000, 0, 100, 4.466596e+08, col = colr[1], border = NA)
+rect(13000, 52000,52000,5.754883e+08, col =colr[2] , border = NA)
+rect(52000, 0 ,240000,10e8, col = colr[3], border = NA)
+points(value~L1 , dat, cex = 1.2)
+legend("bottomright",c("Home Range", "Dispersal", "Migration"), fill = bars, title = "Type of movement")
+
+dev.off()
+```
+
+
+
+Hypothesis 2:
+
+```{r}
+
+png(filename = "www/ReportFilesPlots/Hyphothesis2.1.png",width = 1900, height = 1500, res = 250  )
+par(las = 1, oma = c(3,3,3,3))
+
+plot(value~jitter(L1, 0.5), dPC,
+     log ="x", pch = 16, 
+     ylab= "dPC = dPCIntra + dPCFlux + dPCConnector", 
+     xlab = "Maximum Dispersal Distance threshold Log(m)", 
+     col = dPC$col, cex = 1.2,
+     cex.lab = 1.2, cex.axis = 0.7)
+rect(13000, 0, 100, 30, col = colr[1], border = NA)
+rect(13000, 0,52000,23, col =colr[2] , border = NA)
+rect(52000, 0 ,240000,16, col = colr[3], border = NA)
+points(value~jitter(L1, 0.5), dPC,
+     col = dPC$col, cex = 1.2, pch = 16)
+dev.off()
+```
+
+
+```{r}
+png(filename = "www/ReportFilesPlots/Hyphothesis2.2.png",width = 1900, height = 1500, res = 250  )
+par(las =1,oma = c(3,3,3,3) )
+plot(sapply(unique(L1), function(x) median(value[L1 == x])) ~ unique(L1) , dPC, 
+      cex = 1.5,  col = unique(PCnum$col), 
+     pch = 15, log = "x",
+     cex.lab = 1.2, cex.axis = 0.7, 
+     ylab = "median dPC",
+     xlab = "Maximum Dispersal Distance threshold Log(m)" )
+rect(13000, 0, 100, 0.026, col = colr[1], border = NA)
+rect(13000, 0,52000,0.043, col =colr[2] , border = NA)
+rect(52000, 0 ,240000,0.05, col = colr[3], border = NA)
+points(sapply(unique(L1), function(x) median(value[L1 == x])) ~ unique(L1) , dPC, 
+       cex = 1.2, pch = 0,
+       cex.lab = 1.2, cex.axis = 0.7)
+legend("topleft",c("Home Range", "Dispersal", "Migration"), fill = bars, title = "Type of movement")
+dev.off()
+```
+
+
+
+```{r}
+
+png(filename = "www/ReportFilesPlots/Hyphothesis2.png",width = 1900, height = 1500, res = 250  )
+par(las =1,oma = c(3,3,3,3) )
+meds <- sapply(unique(dPC$L1) ,function(x) median(dPC$value[dPC$L1 == x]))
+
+meds <- reshape2::melt(lapply(meds, function(x) rep(x, 732)))
+
+dPC$med <- meds$value
+dPC$rad <- dPC$value# Relative removal effect
+
+rad <- aggregate(dPC$value, FUN = "scale", by = list(dPC$L1))$x # Mean relative removal efffect
+rad <- reshape2::melt(rad)
+
+rad$sd <- aggregate(dPC$value, FUN = "sd", by = list(dPC$L1))$x
+
+avgrad <-  aggregate(rad$value, FUN = "median", by = list(rad$Var1))$x
+maxrad <-  aggregate(rad$value, FUN = "max", by = list(rad$Var1))$x
+minrad <- aggregate(rad$value, FUN = "min", by = list(rad$Var1))$x
+
+par(las = 1)
+plot(avgrad ~ sort(unique(dPC$L1)), pch =16, 
+     xlab = "Maximum Dispersal Distance thresholds Log(m)", cex = 1,
+     ylab = "dPC Standard Score (z-score)", log = "x", type = "b", lty = 2, 
+     cex.lab = 1.2, cex.axis = 0.7, ylim = c(-0.4,3))
+points(log(maxrad) ~ sort(unique(dPC$L1)), type = "b", col = "darkgreen",lwd = 2)
+points(minrad ~ sort(unique(dPC$L1)), type = "b", col = "blue",lwd = 2)
+rect(13000, -0.4, 100, 3, col = colr[1], border = NA)
+rect(13000,  -0.4, 52000,-0.03, col =colr[2] , border = NA)
+rect(52000, -0.4 ,240000,-0.14, col = colr[3], border = NA)
+abline ( h = 0)
+legend("left",c("Home Range", "Dispersal", "Migration"), fill = bars, title = "Type of movement")
+legend("right",c("Log(max)", "Median", "Min"), lty = 1, col = c("darkgreen", "black", "blue"), title = "dPC z-scores")
+
+dev.off()
+```
+
+
+
+```{r}
+plot(sapply(unique(L1), function(x) median(value[L1 == x])) ~ unique(L1) , dPC, 
+      cex = 1.2,  col = unique(PCnum$col), 
+     pch = 15, log = "x",
+     cex.lab = 0.7, cex.axis = 0.7, 
+     xaxt = "n", ylab = "median dPC")
+points(sapply(unique(L1), function(x) median(value[L1 == x])) ~ unique(L1) , dPC, 
+       cex = 1.2, pch = 0,
+       cex.lab = 0.7, cex.axis = 0.7)
+```
+
+
+
+
+
+```{r, echo = FALSE}
+
+PCIntra <- lapply(metric ,function (x) sapply(x[,4], function(x) x)) # PCintra values
+names(PCIntra) <- as.numeric(sapply(names(PCIntra), function(x)gsub( "m.csv", "",x))) # extract the "m.csv" pattern from the names 
+PCIntra <- lapply(PCIntra, function(x) sort(x, decreasing = T)) # Sort PC (useful to apply colors in maps later)
+PCIntra <- reshape2::melt(PCIntra) # flatten list
+PCIntra$L1 <- as.numeric(PCIntra$L1) # as numeric threshold distances
+
+
+PCflux <- lapply(metric ,function (x) sapply(x[,5], function(x) x)) # PCflux values
+names(PCflux) <- as.numeric(sapply(names(PCflux), function(x)gsub( "m.csv", "",x))) # extract the "m.csv" pattern from the names 
+PCflux <- lapply(PCflux, function(x) sort(x, decreasing = T)) # Sort PC (useful to apply colors in maps later)
+PCflux <- reshape2::melt(PCflux) # flatten list
+PCflux$L1 <- as.numeric(PCflux$L1) # as numeric threshold distances
+
+
+PCcon <- lapply(metric ,function (x) sapply(x[,6], function(x) x)) # PCconnc values
+names(PCcon) <- as.numeric(sapply(names(PCcon), function(x)gsub( "m.csv", "",x))) # extract the "m.csv" pattern from the names 
+PCcon <- lapply(PCcon, function(x) sort(x, decreasing = T)) # Sort PC (useful to apply colors in maps later)
+PCcon <- reshape2::melt(PCcon) # flatten list
+PCcon$L1 <- as.numeric(PCcon$L1) # as numeric threshold distances
+```
+
+```{r, echo = FALSE}
+library(sp)
+
+distances <- as.numeric(gsub( "m.csv", "",names(metric)))
+order <- order(distances)
+names(order) <- distances[order]
+
+```
+
+
+```{r, echo  =FALSE, warning=FALSE, fig.align='center', fig.cap = "Left pane: Overall contribution (in percentage) of the different PC fractions (PCIntra, PCFlux, PCconnector) to the overall habitat availability measured by PCnum in function of the maximum dispersal distances tested on the models. Righ pane: Correlation of patch dPC fractions with the patch attribute (patch relative area). PCconnect values for all patches at 100m dispersal distances = 0, therefore no correlation was possible to calculate. Note that x axis have been logarithmized. "}
+png(filename = "www/ReportFilesPlots/Hyphothesis2.4.png",width = 1000, height = 1500, res = 200  )
+par(mfrow = c(2,1), las = 1, oma = c(0.1,0.1,0.1,0.1),mar = c(4,6,6,3))
+colpal = rev(c('#67001f','#b2182b','#d6604d','#f4a582','#fddbc7','#d1e5f0','#92c5de','#4393c3','#2166ac','#053061'))
+
+dthres <- as.numeric(gsub( "m.csv", "",names(metric)))
+plot(sum(metric[[1]]$dPCintra)/sum(metric[[1]]$dPC)~dthres[order[1]],
+     ylim = c(0,1),col = "black",pch = 16,cex = 1.3,
+     xlim =c(min(dthres),max(dthres)),log = "x",
+     ylab = "Metric contribution to connectivity %",
+     xlab = "Maximum Dispersal Distance thresholds Log(m)")
+for(i in order[-1]){
+points(sum(metric[[i]]$dPCintra)/sum(metric[[i]]$dPC)~dthres[order[i]],
+       col ="black", pch = 16, cex =1.3)
+  points(sum(metric[[i]]$dPCintra)/sum(metric[[i]]$dPC)~dthres[order[i]],
+       col ="gray30", pch = 1, cex =1.3)
+  }
+for(i in order){
+  points(sum(metric[[i]]$dPCflux)/sum(metric[[i]]$dPC)~dthres[order[i]],
+         pch = 17,  col = "black", cex =1.3)
+  points(sum(metric[[i]]$dPCflux)/sum(metric[[i]]$dPC)~dthres[order[i]],
+         pch = 2,  col = "gray30", cex =1.3)
+  }
+for(i in order){
+  points(sum(metric[[i]]$dPCconnector)/sum(metric[[i]]$dPC)~dthres[order[i]], 
+         pch = 15,col = "black", cex =1.3)
+   points(sum(metric[[i]]$dPCconnector)/sum(metric[[i]]$dPC)~dthres[order[i]], 
+         pch = 0,col = "gray30", cex =1.3)
+  }  
+
+rect(13000, -0.4, 100, 1, col = colr[1], border = NA)
+rect(13000,  -0.4, 52000,1, col =colr[2] , border = NA)
+rect(52000, -0.4 ,240000,1, col = colr[3], border = NA)
+legend("topright", legend = c("PCintra", "PCflux", "PCconnector"), pch = c(1,2,0), horiz = F, cex =0.6)
+
+
+
+
+metPCIntra <- editMetric(metric, 4) #dPCIntra in column 4
+metPCflux <- editMetric(metric, 5) # PCflux in column 5
+metPCConnect <- editMetric(metric, 6) # PCconnect in column 6
+metCom <- editMetric(metric, 7) # Number of components in column 7 
+
+colpal = c('#67001f','#b2182b','#d6604d','#f4a582','#fddbc7','#d1e5f0','#92c5de','#4393c3','#2166ac','#053061')
+
+names(colpal)=  sort(metPCIntra$distances)
+
+corr <- c()
+for(i in 1:length(metric)){ 
+  corr$PCflux[i] <- cor(metric[[i]]$dPCflux,metric[[i]]$dA)
+  corr$PCconnector[i] <- cor(metric[[i]]$dPCconnector,metric[[i]]$dA)
+  corr$PCIntra[i] <- cor(metric[[i]]$dPCintra,metric[[i]]$dA)
+  corr$dist[i]<-metCom$distances[i]
+  }
+
+pal <- rev(colpal)[match(corr$dist,as.numeric(names(colpal)))]
+
+plot(PCflux~dist, data = corr,
+  col = "black", pch = 17, cex = 1.2,
+  log = "x", ylim = c(0,1),
+  xlab = "Maximum Dispersal Distance thresholds Log(m)", 
+  ylab = "Pearson correlation with dA")
+  points(PCflux~dist, data = corr, col = "gray30", pch = 2, cex = 1.3)
+points(PCconnector~dist, data = corr,col ="black", pch = 15, cex = 1.2)
+points(PCconnector~dist, data = corr, col = "gray30", pch = 0, cex6= 1.3)
+points(PCIntra~dist, data = corr, col = "black", pch = 15, cex = 1.2)
+points(PCIntra~dist, data = corr, col = "gray30", pch = 1, cex = 1.3)
+rect(13000, -0.4, 100, 1, col = colr[1], border = NA)
+rect(13000,  -0.4, 52000,1, col =colr[2] , border = NA)
+rect(52000, -0.4 ,240000,1, col = colr[3], border = NA)
+legend("bottomright", pch = c(2,0,1), 
+       legend = c(names(corr[1:3])) , cex = 0.6)
+
+dev.off()
+ 
+```
+
+dPCIntra values were highly correlated with patch area at all maximum dispersal distances calculated (Figure 6). dPCFlux correlates increasingly with distances, except for dispersal distances of 100m where dPCFlux is highly correlated with patch area. This shows that for very short dispersal distances the only variable to consider to mantain connectivity is the patch relative size itself. Assuming maximum dispersal distances of 100m, there is not an effective dispersal from one patch to another one, being each patch effectively issolated at this scenario. Correlations of PCconnector with patch area reaches a peak at maximum dispersal distances of 20800m and a drop at dispersal distances of 6700m. Low correlation values between PCconnector and relative patch area (dPa) would imply that for scenarios  at very short and very long maximum distance dispersal the "stepping stone" contribution to connnectivity of a patch is dependant on position the patch in relation with the other patches rather than the patch size itself. However, for scenarios which maximum dispersal distances coincides with the ones reported for Tapirs, correlations of dPCconnector with dPA increase with distance, peaking at 20800m. This suggests that changes in patch size could mean higher relative changes on the "stepping stone" function of the patch for such dispersal scenarios, resulting on changes up 20% in the overall seed dispersal connectivity of *Raphia taedigera* populations in the ROI.
+
+
+By observing the variation of the dPC metric with latitude it becomes more evident the relative importance of few patches to maintain the habitat connectivity and availability for seed dispersal (Figure 7). Considering that for the ROI spherical changes of one degree represents linear distances of approx 100Km the relative importance of those patches to mantain the connectivity at larger distances becomes apparent (Figure 7). Patches with the highest dPC values were located at similar latitudes for all dispersal distances. For very short dispersal distances (100m) the removal of the isolated patch located between 8ª- 9º degrees will result in higher relative changes to the overall habitat connectivity. Nevertheless, at increasing maximum dispersal distances the removal of patches situated near the 12º parallel would have incresingly higher effects over the connectivity, specially at medium maximum dispersal distances ranges considered in this study. The removal effect of patches around the 10.5º parallel becomes higher at dispersal scenarios of 240000m. 
+
+
+
+```{r, echo  =FALSE, fig.align='center', fig.cap="Variation on the dPC metric with latitude for all patches for different maximum distance dispersal scenarios. Latitude of the centroid patches are represented in the y axis and ECA values along the x axis. Horizontal dotted line represent the latitude of the Costa Rica - Nicaragua border at the Atlantic coast of the ROI, Vertical dotted line represent the maximum ECA value reached for a single patch for all distance thresholds calculated (i.e. maxECA at 1500m)"}
+  par(mfrow = c(2,5), oma = c(2,1,2,1), mar = c(2,2,1,0), las = 1)
+ee <- names(order)[match(names(order), names(order)[order])] # rearrange to match legend
+rad
+for(i in order) {
+  plot((metric[[i]]$dPC),coordinates(dist)[,2], type= "l",xlim = c(0,40),yaxt = "n", ylab = "Latitude",
+                              pch = 16, cex = 0.6, col = "gray70")
+  points((metric[[i]]$dPC),coordinates(dist)[,2], 
+                              pch = 16, cex = 0.6, col = rev(colpal)[match(distances[i],names(colpal))])
+  abline(h = (10.94*1661139)/15, lwd = 1, lty =2)
+  abline(v = max(metric$`1500m.csv`$dPC ), lty = 4)
+  
+  axis(2, c(8,9,10,11,12,13, 15), at = seq(min(coordinates(dist)[,2]),max(coordinates(dist)[,2]), length.out = 7))
+ legend("bottomright", legend = ee[i], bty = "n", text.font = 2)
+  }
+title(" dPC by latitude", outer = T)
+
+dPC
+
+
+```
+
+
+```{r}
+png(filename = "www/ReportFilesPlots/Hyphothesis2.3.png",width = 1900, height = 3000, res = 250 )
+par(las = 1, oma = c(3,3,3,3))
+plot(scale(metric[[1]]$dPC),coordinates(dist)[,2], xlim = c(-3,20),type = "l",
+       ylab = "Latitude",yaxt = "n",
+       xlab = "dPC z-scores", col =bars[1], cex.lab = 1.5)
+for(i in seq(2,7,1)) {
+points(scale(metric[[i]]$dPC),coordinates(dist)[,2], type= "l",
+                              pch = 16, cex = 0.6, col = bars[1])}
+for(i in seq(8,9,1)) {
+points(scale(metric[[i]]$dPC),coordinates(dist)[,2], type= "l",
+                              pch = 16, cex = 0.6, col = bars[2])}
+
+for(i in 10) {
+points(scale(metric[[i]]$dPC),coordinates(dist)[,2], type= "l",
+                              pch = 16, cex = 0.6, col = "blue")}
+
+
+axis(2, c(8,9,10,11,12,13, 15), at = seq(min(coordinates(dist)[,2]),max(coordinates(dist)[,2]), length.out = 7))
+abline(h = (10.94*1661139)/15, lwd = 1, lty =2)
+legend("right",c("Home Range", "Dispersal", "Migration"), fill = bars, title = "Type of movement")
+dev.off()
+```
+
+
+
+
+
+
+=== 
+Appendix
+===
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ```{r, echo = FALSE, fig.align='center', warning=F, fig.cap="Cumulative sum of the dPCnum metrics for all patches at the different dispersal distance thresholds. Y axis in on a logarithmic scale to differentiate better dPCnum patterns between thresholds", warnings=F} -->
+<!-- order <- match(as.numeric(gsub( "m.csv", "",names(metric))),as.numeric(names(colpal))) -->
+<!-- col = colpal[order] # Match palette order with metric object order -->
+
+<!-- par(las = 1, mfrow = c(1,3)) -->
+
+<!-- plot(cumsum(sort(metric[[1]]$dPCintra)), -->
+<!--      ylim = c(1e-07,100), xlim = c(-100, 700),  -->
+<!--      log ="y", type ="l", col = col[1],  -->
+<!--      lwd = 3, xlab = "Patches Rank",   -->
+<!--      ylab = "∑ dPCIntra") -->
+<!--   for(i in 2:10){ points(cumsum(sort(metric[[i]]$dPCintra)),  -->
+<!--                          col =col[i], type = "l", lwd = 3)} # Add rest of metric to plot -->
+<!-- legend("topleft", names(colpal), col = colpal, pch = 16, cex = 0.7) -->
+
+
+<!-- plot(cumsum(sort(metric[[1]]$dPCflux)), ylim = c(1e-07,100),  -->
+<!--      xlim = c(-100, 700), log ="y", type ="l",  -->
+<!--      col = col[1], lwd = 3, xlab = "Patches Rank", -->
+<!--      ylab = "∑ dPCFlux") -->
+<!--   for(i in 2:10){ points(cumsum(sort(metric[[i]]$dPCflux)),  -->
+<!--                          col =col[i], type = "l", lwd = 3)} # Add rest of metric to plot -->
+<!-- legend("topleft", names(colpal), col = colpal, pch = 16, cex = 0.7) -->
+
+<!-- plot(cumsum(sort(metric[[1]]$dPCconnector)), -->
+<!--      ylim = c(1e-07,100),xlim = c(-100, 700),  -->
+<!--      log ="y", type ="l", col = col[1],  -->
+<!--      lwd = 3, xlab ="Patches Rank",  -->
+<!--      ylab = "∑ dPCconnector") -->
+<!-- for(i in 2:10){ points(cumsum(sort(metric[[i]]$dPCconnector)), col =col[i], type = "l", lwd = 3)} # Add rest of metric to plot -->
+<!-- legend("topleft", names(colpal), col = colpal, pch = 16, cex = 0.7) -->
+<!-- ``` -->
+
+
+
+
+
+
+
+```{r, eval = FALSE,  echo = FALSE, out.width='400px', warning=F, results=F, fig.align="center", fig.cap="Summary plot with the results for the connectivity models at different dispersal thresholds in Raphia taedigera patches. The right pane shows different statistical metrics sumarizing the dPC (Probability of connectivity) metric values for all patches. At the topright panel the relative partitioning of the network of patches due to clustering is expresed as the ratio: number of components/number of patches. Values ranges from 0-1 being 1: n components = n patches, 0:  n components = 1 (i.e. all patches in the network are connected). Bottomright panel shows the maximum dPC value of the distribution of dPC values at each dispersal thresholds. Shadowed rectangles highlight the portion of the simulations for which the dispersal thresholds correspond to actual literature observations of dispersal distances in Tapirs "}
+## Plot PC METRIC summary values (with the excemption of max values)
+
+split.screen(rbind(c(0.15,0.6,0.05, 0.98), c(0.6, 0.98, 0.05, 0.6), c(0.6, 0.98, 0.6, 0.98), c(0.0, 0.13, 0.1, 0.98), c(0.01,0.9,0.01,0.2)))
+cex = 1
+colr = scales::alpha("#a7c78e",alpha = 0.3)
+screen(1)
+par(las = 2, mar = c(4,4,0,1), oma = c(1,1,1,1))
+plot(Min~distances, data = metPC, 
+    ylim = c(0,0.4), log = "x", pch = 8, 
+    col =colpal, cex = cex, 
+    ylab = "dPC metrics ", xlab = "Dispersal thresholds (meters)", cex.lab = 0.7, cex.axis = 0.7)
+points(firstQ~distances, metPC,
+        pch = 10,col =colpal, cex = cex)
+points(Median~distances, metPC,
+        pch = 15, col =colpal , cex = cex)
+points(Mean~distances, metPC,
+        pch = 16, col =colpal, cex = cex)
+points(thirdQ~distances, metPC,
+        pch = 6, col =colpal, cex = cex)
+rect(1500, 0,52000,0.35, col = colr, border = NA)
+# Add trend lines
+
+#for(i in 1:length(tline)){abline(tline[[i]], lty =2, col=colpal[i]) }
+screen(2)
+par(las=2, mar = c(4,4,0,0))
+# Plot max values
+plot(Max~distances, metPC, 
+      log ="x",  pch = 16,
+     ylab = "Max dPC", xlab = "Dispersal thresholds (meters)", 
+     col =colpal, cex = cex, ylim = c(0,35), cex.lab = 0.7, cex.axis = 0.7)
+rect(1500, 15,52000,35, col = colr, border = NA)
+screen(3)
+par(las=2, mar = c(0,4,0,0))
+# Plot number of components 
+plot(Max/730~distances, metCom, 
+     log ="x",  pch = 16,
+     ylab = "# components / # patches ", xlab = "Dispersal thresholds (meters)", 
+     col =colpal, cex = cex, ylim = c(0,1) ,xaxt = "n",cex.lab = 0.7, cex.axis = 0.7)
+rect(1500, 0,52000,0.2, col = colr, border = NA)
+screen(4)
+par(mar = c(0,0,0,0), oma = c(0,1,2,0))
+plot.new()
+legend("center", legend = c("Min", "1st Q", "Median", "Mean", "3rd Q"),
+       pch = c(8,10,15,16,6), title = "Metrics")
+
+```
+
+### Number of components 
+
+To asses the topological sub-structure of the network of *Raphia taedigera* patches, the ratio between the number of components found by CONEFOR at each dispersal treshold evaluated and the total number of *Raphia taedigera* patches was calculated. This was done in order to normalize and compare the level of clustering at each of the dispersal thresholds calculated. Ratio value of 1 represent that each patch forms a single cluster and 0 values means that all patches form an intertangled network. An inverse relationship between the ratio values and the dispersal thresholds was found. At minimum dispersal distances (100m), the ratio No. components/ No. patches was of 0.8 meaning that 80% of patches forms clusters "isolated" from the overall network. Until dispersal distances of 1500m the ratio values diminishes rapidly. At 1500m, the ratio clusters/patch is lower than 0.2 (Figure 8).  Low ratio values are mantained overall the distance thresholds considered to be relevant for the tapir dispersal. At the highest dispersal threshold distances considered (240Km), the ratio is equal to 1 (Figure 8). 
+
+
+```{r, echo = FALSE, fig.align="center", fig.cap="Ratio between the number of components and total number of patches calculated for different dispersal threshold values. Number of patches is fixed overall calculations, therefore, variations on this ratio represents the rate of clustering and connectivity among patches when different dispersal distance thresholds considered. Ratios equals to one (1) represent a complete unconnected network of patches (i.e. No effective connection (dispersal) among any pair of patches) Highlighted within the green rectangle are the values for which dispersal thresholds correspond to the tapir dispersal distances reported in literature."}
+par(las = 1)
+plot(Max/730~distances, metCom, 
+     log ="x",  pch = 16,
+     ylab = "No. components / No. patches ", xlab = "Dispersal thresholds log(meters)", 
+     col =colpal, cex = 1.5, ylim = c(0,1),cex.lab = 1)
+rect(1500, 0,52000,0.2, col = colr, border = NA)
+legend("topright", legend = sort(unique(dPC$L1)),
+       pch =16, col = colpal[order(as.numeric(names(colpal)))], title = "Dispersal thresholds", bty = "n")
+```
+
+
+==== 
+Discussion points: Why this sudden drops in overall habitat availability at dispersal distances of 300m and 6700m? 
+====
+
+===
+Discussion point: What are those patches that maintain the structural connectivity at all dispersal distances? What are happening around them in terms of deforestation pressures, have they undergone changes in the last years? 
+===
+

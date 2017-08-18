@@ -1,0 +1,105 @@
+gdistance
+
+```{r}
+
+# Load Centroids 
+
+centr <- read.table("www/data/centroids/centroids.txt", header = T, sep = ";", dec = ",")
+centr[,c(5)] <- as.numeric(centr[,c(5)])
+centr[,c(6)] <- as.numeric(centr[,c(6)])
+
+centr <- centr[centr[,c(6)]>= 8.074 & centr[,c(6)] <= 15.179,]
+centr <- centr[centr[,c(5)]>= -85.21 & centr[,c(5)]<= -82.57,]
+summary(coordinates(raster1))
+# Load cost raster 
+raster <- raster::raster("www/data/COST/COST.tif") 
+#reduce resolution from 30x30 to 90x90(m)
+raster01 <- raster::aggregate(raster, fact = 3, fun = mean)
+#Reduce resolution from 30x30 to 900x900 (m)
+raster1 <- raster::aggregate(raster, fact = 30, fun = mean)
+# Reduce resolution from 30x30 to 3000x3000 (m)
+raster2 <- raster::aggregate(raster, fact = 100, fun = mean)
+
+
+# create a Transition object from the raster
+ar <- gdistance::transition(raster01,mean,8)
+# apply geocorrection (to transform from euclidean to spherical distances)
+arC <- gdistance::geoCorrection(ar, type="c", scl=TRUE)
+# same geocorrection but for random walks 
+arR <- gdistance::geoCorrection(ar, type="r", scl=TRUE)
+
+# create a Transition object from the raster
+pr <- gdistance::transition(raster1,mean,8)
+prC <- gdistance::geoCorrection(pr, type="c", scl=TRUE)
+prR <- gdistance::geoCorrection(pr, type="r", scl=TRUE)
+
+#create a Transition object from the raster
+tr <- gdistance::transition(raster2,mean,8)
+trC <- gdistance::geoCorrection(tr, type="c", scl=TRUE)
+trR <- gdistance::geoCorrection(tr, type="r", scl=TRUE)
+```
+
+```{r}
+obs <- read.csv("www/data/TapirRecords/TapirRecords.csv", header = T, stringsAsFactors = F)
+
+# Match tapir observations to raster extent
+obs <- obs[obs$Lat>= 8.074 & obs$Lat <= 15.179,]
+obs <- obs[obs$Long>= -85.21 & obs$Long <= -82.57,]
+obs <- obs[,c(2,1)] # Arrange x, y
+
+```
+
+```{r}
+# RSP with tapir 
+
+getCorr <- function(tapir, patch, transition, tetha){
+
+# Spatial points with animal
+ts1 <- SpatialPoints(tapir)
+# Spatial points with path 
+patch1 <- patch[sample(length(patch$x), length(tapir$Lat), replace = FALSE),]
+rph1 <- SpatialPoints(patch1)
+# calculate distances
+rSPraster4.1 <- gdistance::passage(transition, ts1, rph1, as.numeric(tetha))
+return(rSPraster4.1)
+}
+
+
+
+testco2 <- getCorr(obs, centr[,c(5,6)], prC, 0.01)
+testco3 <- getCorr(obs, centr[,c(5,6)], prC, 0.01)
+testco4 <- getCorr(obs, centr[,c(5,6)], prC, 0.01)
+
+rlist <- list(rlist, rlist)
+# theta 0.01
+ralist <- list()
+for(i in 1:20){
+  print(i)
+ralist[[i]] <-tryCatch({ getCorr(obs, centr[,c(5,6)], prC, 0.01)}, error = function(e){print("This one had an error")})
+}
+
+# theta 1e-12
+ralist2 <- list()
+for(i in 1:20){
+  print(i)
+ralist2[[i]] <-tryCatch({ getCorr(obs, centr[,c(5,6)], prC, 1e-12)}, error = function(e){print("This one had an error")})
+}
+
+
+
+suma <- do.call("sum",ralist)
+suma2 <-do.call("sum",ralist2)
+
+plot(suma2)
+points(centr[,c(5,6)])
+points(obs, col = "blue")
+# Write raster outputs 
+raster::writeRaster(suma2, "www/data/raster/tapirDist/sumtry2t1e-12", format = "GTiff")
+# raster::writeRaster(rSPraster3, "www/data/raster/3KM/Tetha1e-14", format = "GTiff")
+# raster::writeRaster(rSPraster2, "www/data/raster/3KM/Tetha0.01", format = "GTiff")
+# raster::writeRaster(rSPraster, "www/data/raster/3KM/Tetha2", format = "GTiff")
+```
+
+
+
+
