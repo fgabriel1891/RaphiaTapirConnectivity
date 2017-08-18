@@ -1,0 +1,13 @@
+Execution started at: 4:39:07 PM 7/12/2017
+Number of nodes to process: 732
+Sum of the attributes of existing nodes: 1579029888
+Distance and probability (probabilistic indices): 6700 0.05
+PC computed in the default mode: checking all paths (no connections discarded)
+Node file: D:\people\gabriel\Conefor\TryOut2\nodes_calculated_area_PatchesSinglePart
+Connection file: D:\people\gabriel\Conefor\TryOut2\distances_edges_PatchesSinglePart
+Processed indices: PC
+Indices processing started at: 4:39:08 PM 7/12/2017
+Processing time for indices:
+PC:  34 minutes 33 seconds
+Execution ended at 5:14:08 PM 7/12/2017
+Total processing time  35 minutes 1 seconds
